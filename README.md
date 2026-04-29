@@ -150,6 +150,8 @@ JSON schema correctness
 Bilingual fields (en, ar)
 Confidence values (high, medium, low)
 Minimum product count
+
+
 🎯 Key Features
 🌐 Bilingual AI (English + Arabic)
 🧠 Natural language understanding
@@ -158,11 +160,15 @@ Minimum product count
 📊 Confidence scoring
 🎨 Modern UI (glassmorphism)
 🧪 Automated evaluation suite
+
+
 ⚖️ Tradeoffs
 Product catalog is static (no real-time data)
 Arabic parsing is rule-based (not full NLP)
 AI depends on prompt quality
 OpenRouter limited by tokens
+
+
 🛠️ Tooling
 Backend logic: ChatGPT-assisted development
 Frontend: Antigravity UI approach
