@@ -2,6 +2,7 @@ import axios from "axios";
 import process from "node:process";
 import { PRODUCT_CATALOG } from "../data/productCatalog.js";
 
+
 const SYSTEM_PROMPT = `You are a bilingual (English + Arabic Gulf dialect) product recommendation engine for gifts related to mothers and babies in the UAE/GCC region.
 
 Your job:
@@ -201,7 +202,6 @@ const shortlistProducts = (queryData) => {
 		return scored.slice(0, 8);
 	}
 
-	// If age is not provided, avoid defaulting to newborn-heavy picks by diversifying across age tags.
 	const selected = [];
 	const usedAgeBuckets = new Set();
 	const bucketOrder = ["6-9m", "3-6m", "9-12m", "1y", "0-3m", "newborn"];
@@ -354,8 +354,16 @@ const callAI = async (prompt) => {
 	);
 };
 
+
 export const getGiftRecommendations = async (userInput) => {
+
 	const queryData = parseQuery(userInput);
+	const isFatherQuery = /father|dad|daddy|husband|زوجي|أب/.test(queryData.raw);
+	const hasBabyContext = queryData.explicitBabyContext || queryData.childRelationMentioned || queryData.babyAge;
+
+	if (isFatherQuery && !hasBabyContext) {
+		return JSON.stringify({ products: [], message: "I don't know" });
+	}
 
 	if (queryData.childRelationMentioned && !queryData.explicitBabyContext && !queryData.babyAge) {
 		return JSON.stringify({ products: [], message: "I don't know" });

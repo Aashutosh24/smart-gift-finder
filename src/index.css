@@ -1,52 +1,80 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{
-  /* Warm rose-gold + violet palette */
-  --primary-200:#fbcfe8;--primary-300:#f9a8d4;--primary-400:#f472b6;--primary-500:#ec4899;
-  --accent-200:#ddd6fe;--accent-300:#c4b5fd;--accent-400:#a78bfa;--accent-500:#8b5cf6;
 
-  /* Text colors — warm off-whites instead of cold slate */
-  --text-primary:#f5f0eb;
-  --text-secondary:#d4ccc4;
-  --text-muted:#a89f96;
-  --text-dim:#7a726a;
+:root {
+  /* Vibrant & Sophisticated Palette */
+  --primary-500: #ec4899; /* Hot Pink */
+  --primary-600: #db2777;
+  --accent-500: #8b5cf6;  /* Vivid Violet */
+  --accent-600: #7c3aed;
+  
+  /* Text tokens: High contrast for "WOW" factor */
+  --text-pure: #ffffff;
+  --text-high: #f5f3f2;
+  --text-mid: #d1d5db;
+  --text-low: #9ca3af;
+  
+  /* Modern Dark Base */
+  --bg-base: #050505;
+  --bg-surface: #0a0a0f;
+  
+  /* Glass tokens: Sharper, more vibrant */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-bg-hover: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border-vibrant: rgba(236, 72, 153, 0.3);
+  --glass-blur: 16px;
+  --glass-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
 
-  /* Background */
-  --bg-deep:#0c0a14;
+  /* Functional Colors */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
 
-  /* Glass tokens */
-  --glass-bg:rgba(255,255,255,0.07);--glass-bg-hover:rgba(255,255,255,0.13);
-  --glass-border:rgba(255,255,255,0.10);--glass-border-hover:rgba(255,255,255,0.20);
-  --glass-blur:20px;--glass-shadow:0 8px 32px rgba(0,0,0,0.3);
+  /* Typography */
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-ar: 'IBM Plex Sans Arabic', sans-serif;
 
-  /* Confidence */
-  --conf-high:#34d399;--conf-med:#fbbf24;--conf-low:#f87171;
-
-  /* Typography — DM Sans (body), Sora (display), IBM Plex Sans Arabic */
-  --font-display:'Sora',sans-serif;
-  --font-body:'DM Sans',sans-serif;
-  --font-ar:'IBM Plex Sans Arabic',sans-serif;
-
-  --radius-sm:8px;--radius-md:14px;--radius-lg:20px;--radius-xl:28px;--radius-full:9999px;
-  --transition-fast:0.2s cubic-bezier(0.4,0,0.2,1);
-  --transition-smooth:0.35s cubic-bezier(0.4,0,0.2,1);
+  /* Spacing & Radius */
+  --radius-lg: 20px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+  
+  /* Animation Timing */
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 }
-html{scroll-behavior:smooth}
-body{
-  font-family:var(--font-body);
-  color:var(--text-primary);
-  background:var(--bg-deep);
-  min-height:100vh;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-  letter-spacing:0.01em;
-}
-::selection{background:var(--primary-500);color:#fff}
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:var(--radius-full)}
 
-/* RTL mode */
-[dir="rtl"] body{font-family:var(--font-ar),var(--font-body)}
-[dir="rtl"] .hero h1{font-family:var(--font-ar)}
-[dir="rtl"] .card-title{font-family:var(--font-ar)}
-[dir="rtl"] .search-input{font-family:var(--font-ar),var(--font-body);text-align:right}
+html {
+  scroll-behavior: smooth;
+  background: var(--bg-base);
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-high);
+  background: var(--bg-base);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+[dir="rtl"] body {
+  font-family: var(--font-ar), var(--font-body);
+}
+
+::selection {
+  background: var(--primary-500);
+  color: white;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { 
+  background: rgba(255, 255, 255, 0.1); 
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }

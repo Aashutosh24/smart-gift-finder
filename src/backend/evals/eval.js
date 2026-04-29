@@ -7,6 +7,15 @@
 
 import { getGiftRecommendations } from "../services/aiService.js";
 import { validateAIResponse } from "../utils/validateResponse.js";
+import dotenv from "dotenv";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// load the same .env your server uses
+dotenv.config({ path: join(__dirname, "..", ".env") });
 
 const TESTS = [
   // ── Grounding tests ──
@@ -25,6 +34,7 @@ const TESTS = [
   { name: "Out-of-scope: weather", query: "What is the weather today?", expect: "unknown" },
   { name: "Out-of-scope: random", query: "asdfghjkl qwerty", expect: "unknown" },
   { name: "Out-of-scope: recipe", query: "How to cook biryani?", expect: "unknown" },
+  { name: "Out-of-scope: friend birthday", query: "A gift for my bestfriend for his birthday", expect: "unknown" },
 
   // ── Budget filtering ──
   { name: "Budget: strict 50 AED", query: "Gift for newborn under 50 AED", expect: "products", maxPrice: 50 },
