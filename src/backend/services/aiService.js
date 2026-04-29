@@ -50,9 +50,14 @@ const normalizeText = (value) =>
 
 const extractJSON = (text) => {
 	if (!text) return text;
-	const cleaned = text.trim();
+	let cleaned = text.trim();
+	if (cleaned.startsWith("```")) {
+		cleaned = cleaned.replace(/^```(?:json)?\s*/i, "");
+	}
+	cleaned = cleaned.replace(/\s*```$/i, "");
+
 	const fenced = cleaned.match(/```(?:json)?\s*\n?([\s\S]*?)\n?\s*```/);
-	return fenced ? fenced[1].trim() : cleaned;
+	return fenced ? fenced[1].trim() : cleaned.trim();
 };
 
 const parseQuery = (input) => {
@@ -268,9 +273,7 @@ Return format:
 {
 	"products": [
 		{
-			"name": { "en": "", "ar": "" },
-			"category": { "en": "", "ar": "" },
-			"price_range": "XX - XX AED",
+			"id": "product-id",
 			"reason": { "en": "", "ar": "" },
 			"confidence": "high"
 		}
@@ -282,11 +285,11 @@ const callGemini = async (prompt) => {
 	const key = process.env.GEMINI_API_KEY;
 	if (!key) throw new Error("GEMINI_API_KEY not set");
 
-	const model = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+	const model = process.env.GEMINI_MODEL || "gemini-2.5-flash-lite";
 	const response = await axios.post(
 		`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`,
 		{
-			contents: [{ parts: [{ text: prompt }] }],
+			contents: [{ parts: [{ text: SYSTEM_PROMPT + "\n\n" + prompt }] }],
 			generationConfig: {
 				temperature: 0.2,
 				responseMimeType: "application/json",
@@ -312,6 +315,8 @@ const callOpenRouter = async (prompt) => {
 				{ role: "user", content: prompt },
 			],
 			temperature: 0.2,
+			max_tokens: 500,
+			response_format: { type: "json_object" }
 		},
 		{
 			headers: {
@@ -364,5 +369,36 @@ export const getGiftRecommendations = async (userInput) => {
 
 	const prompt = buildPrompt(userInput, shortlist);
 	const aiResponse = await callAI(prompt);
-	return aiResponse;
+
+	let parsed;
+	try {
+		parsed = JSON.parse(aiResponse);
+	} catch {
+		return JSON.stringify({ products: [], message: "I don't know" });
+	}
+
+	if (parsed?.message === "I don't know") {
+		return JSON.stringify(parsed);
+	}
+
+	const catalogById = new Map(PRODUCT_CATALOG.map((p) => [p.id, p]));
+	const merged = (parsed.products || [])
+		.map((p) => {
+			const item = catalogById.get(p.id);
+			if (!item) return null;
+			return {
+				name: item.name,
+				category: item.category,
+				price_range: item.priceRange,
+				reason: p.reason,
+				confidence: p.confidence,
+			};
+		})
+		.filter(Boolean);
+
+	if (merged.length === 0) {
+		return JSON.stringify({ products: [], message: "I don't know" });
+	}
+
+	return JSON.stringify({ products: merged });
 };
