@@ -1,4 +1,4 @@
-Smart Gift Finder — AI-Powered Mom & Baby Gift Recommendations
+# Smart Gift Finder — AI-Powered Mom & Baby Gift Recommendations
 
 A bilingual (English + Arabic) AI-powered gift recommendation system that converts natural language queries into grounded, structured, and explainable product suggestions for mothers and babies.
 
@@ -44,7 +44,7 @@ Structured JSON Response
 UI Rendering
 
 
-🧩 How It Works
+# 🧩 How It Works
 
 1. Query Understanding
 Extracts:
@@ -90,7 +90,7 @@ Bilingual output
 Schema correctness
 
 
-⚡ AI Providers & Tradeoffs
+# ⚡ AI Providers & Tradeoffs
 
 🟢 Primary: Google Gemini
 Fast
@@ -135,7 +135,7 @@ This is displayed as:
 ⚠️
 Couldn’t understand your request. Try being more specific about baby’s age, budget, or gift type.
 
-🧪 Evaluation
+# 🧪 Evaluation
 
 Run: node src/backend/evals/eval.js
 
@@ -162,7 +162,7 @@ Confidence values (high, medium, low)
 Minimum product count
 
 
-🎯 Key Features
+# 🎯 Key Features
 
 🌐 Bilingual AI (English + Arabic)
 
@@ -181,7 +181,7 @@ Minimum product count
 
 
 
-⚖️ Tradeoffs
+# ⚖️ Tradeoffs
 Product catalog is static (no real-time data)
 
 Arabic parsing is rule-based (not full NLP)
@@ -191,7 +191,7 @@ AI depends on prompt quality
 OpenRouter limited by tokens
 
 
-🛠️ Tooling
+# 🛠️ Tooling
 
 Backend logic: ChatGPT-assisted development
 
