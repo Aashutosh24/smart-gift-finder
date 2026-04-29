@@ -305,7 +305,7 @@ const callOpenRouter = async (prompt) => {
 	const key = process.env.OPENROUTER_API_KEY;
 	if (!key) throw new Error("OPENROUTER_API_KEY not set");
 
-	const model = process.env.OPENROUTER_MODEL || "google/gemini-2.5-pro";
+	const model = process.env.OPENROUTER_MODEL || "google/gemini-3-flash-preview";
 	const response = await axios.post(
 		"https://openrouter.ai/api/v1/chat/completions",
 		{

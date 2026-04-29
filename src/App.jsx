@@ -4,9 +4,9 @@ import "./App.css";
 const UI = {
   en: {
     title: "Smart Gift Finder",
-    subtitle: "Tell us who you're shopping for — baby's age, budget, preferences — and our",
-    subtitleBold: "AI",
-    subtitleEnd: "will curate perfect gift ideas instantly.",
+    subtitle: "Describe who you're shopping for — age, budget, or occasion — and get ",
+    subtitleBold: "curated gift ideas",
+    subtitleEnd: " instantly.",
     placeholder: "e.g. Gift for a mom with a 6-month-old baby under 200 AED",
     button: "Find Gifts",
     searching: "Analyzing...",
@@ -27,9 +27,9 @@ const UI = {
   },
   ar: {
     title: "مكتشف الهدايا الذكي",
-    subtitle: "أخبرنا لمن تبحث عن هدية — عمر الطفل، ميزانيتك، تفضيلاتك — و",
-    subtitleBold: "الذكاء الاصطناعي",
-    subtitleEnd: "سيقترح لك أفضل الهدايا فوراً.",
+    subtitle: "صِف لمن تتسوق — العمر، الميزانية، أو المناسبة — واحصل على ",
+    subtitleBold: "أفكار هدايا منتقاة",
+    subtitleEnd: " فوراً.",
     placeholder: "مثال: هدية لأم طفلها عمره ٦ أشهر بأقل من ٢٠٠ درهم",
     button: "بحث عن هدايا",
     searching: "جاري التحليل...",
@@ -64,13 +64,13 @@ function App() {
   const [error, setError] = useState("");
   const [setupError, setSetupError] = useState("");
   const [hasSearched, setHasSearched] = useState(false);
-  
+
   const t = UI[lang];
 
   const handleSearch = async (searchQuery) => {
     const q = searchQuery || query;
     if (!q.trim()) return;
-    
+
     setLoading(true);
     setError("");
     setSetupError("");
@@ -89,7 +89,7 @@ function App() {
         setSetupError(data.setup);
         return;
       }
-      
+
       if (!res.ok) {
         setError(data.error || t.errorGeneric);
         return;
@@ -133,11 +133,11 @@ function App() {
 
       <section className="search-container">
         <div className="search-box">
-          <input 
-            className="search-input" 
+          <input
+            className="search-input"
             placeholder={t.placeholder}
-            value={query} 
-            onChange={(e) => setQuery(e.target.value)} 
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
             disabled={loading}
           />
@@ -208,7 +208,7 @@ function App() {
 
       {!loading && !error && !setupError && results.length === 0 && !hasSearched && (
         <div className="empty-state">
-          <span className="empty-emoji">💝</span>
+
           <p className="empty-text">{t.emptyText}</p>
         </div>
       )}
