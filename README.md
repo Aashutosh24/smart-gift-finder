@@ -140,37 +140,63 @@ Couldn’t understand your request. Try being more specific about baby’s age, 
 Run: node src/backend/evals/eval.js
 
 Test Coverage
+
 Category	What it tests
+
 Grounding	Correct product selection
+
 Arabic input	Multilingual handling
+
 Uncertainty	Proper refusal
+
 Budget filtering	Strict price control
+
 Validation Checks
+
 JSON schema correctness
+
 Bilingual fields (en, ar)
+
 Confidence values (high, medium, low)
+
 Minimum product count
 
 
 🎯 Key Features
+
 🌐 Bilingual AI (English + Arabic)
+
 🧠 Natural language understanding
+
 🔍 RAG-based product grounding
+
 ⚠️ Honest uncertainty handling
+
 📊 Confidence scoring
+
 🎨 Modern UI (glassmorphism)
+
 🧪 Automated evaluation suite
+
+
 
 
 ⚖️ Tradeoffs
 Product catalog is static (no real-time data)
+
 Arabic parsing is rule-based (not full NLP)
+
 AI depends on prompt quality
+
 OpenRouter limited by tokens
 
 
 🛠️ Tooling
+
 Backend logic: ChatGPT-assisted development
+
 Frontend: Antigravity UI approach
+
 AI APIs: Gemini + OpenRouter
+
 Testing: Custom eval.js suite
